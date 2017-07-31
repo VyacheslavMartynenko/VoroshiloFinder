@@ -23,11 +23,17 @@ public class DataBody {
     @SerializedName("popup")
     private int popup;
 
+    @SerializedName("popup_text")
+    private int popupText;
+
     @SerializedName("popup_url")
     private String popupUrl;
 
     @SerializedName("is_burst")
     private int burstStatus;
+
+    @SerializedName("burst_text")
+    private int burstText;
 
     @SerializedName("burst_url")
     private String burstUrl;
@@ -35,11 +41,13 @@ public class DataBody {
     @SerializedName("show_tutorial")
     private int tutorialStatus;
 
-    public DataBody(int netType, int popup, String popupUrl, int burstStatus, String burstUrl, int tutorialStatus) {
+    public DataBody(int netType, int popup, int popupText, String popupUrl, int burstStatus, int burstText, String burstUrl, int tutorialStatus) {
         this.netType = netType;
         this.popup = popup;
+        this.popupText = popupText;
         this.popupUrl = popupUrl;
         this.burstStatus = burstStatus;
+        this.burstText = burstText;
         this.burstUrl = burstUrl;
         this.tutorialStatus = tutorialStatus;
     }
@@ -60,6 +68,14 @@ public class DataBody {
         this.popup = popup;
     }
 
+    public int getPopupText() {
+        return popupText;
+    }
+
+    public void setPopupText(int popupText) {
+        this.popupText = popupText;
+    }
+
     public String getPopupUrl() {
         return popupUrl;
     }
@@ -74,6 +90,14 @@ public class DataBody {
 
     public void setBurstStatus(int burstStatus) {
         this.burstStatus = burstStatus;
+    }
+
+    public int getBurstText() {
+        return burstText;
+    }
+
+    public void setBurstText(int burstText) {
+        this.burstText = burstText;
     }
 
     public String getBurstUrl() {
