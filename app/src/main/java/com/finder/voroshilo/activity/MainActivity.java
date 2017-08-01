@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ApplicationsRequest.requestApplications(new ApplicationRequestCallback(this));
+        if (categoryList == null || applicationList == null) {
+            ApplicationsRequest.requestApplications(new ApplicationRequestCallback(this));
+        }
     }
 
     @Override
