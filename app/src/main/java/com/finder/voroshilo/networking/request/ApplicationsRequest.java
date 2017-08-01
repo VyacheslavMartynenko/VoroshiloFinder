@@ -17,7 +17,7 @@ public class ApplicationsRequest {
         void onError(Throwable throwable);
     }
 
-    public void requestApplications(final ApplicationsRequest.ApplicationCallback callback) {
+    public static void requestApplications(final ApplicationsRequest.ApplicationCallback callback) {
         ApiBuilder.getApiService().getData().enqueue(new Callback<MainDataBody>() {
             @Override
             public void onResponse(@NonNull Call<MainDataBody> call, @NonNull Response<MainDataBody> response) {

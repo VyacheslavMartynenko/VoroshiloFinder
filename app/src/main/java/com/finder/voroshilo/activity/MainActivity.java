@@ -1,9 +1,6 @@
 package com.finder.voroshilo.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,12 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.finder.voroshilo.R;
-import com.finder.voroshilo.model.networking.data.Application;
-import com.finder.voroshilo.model.networking.data.Category;
 import com.finder.voroshilo.model.networking.data.DataBody;
 import com.finder.voroshilo.networking.request.ApplicationsRequest;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -33,24 +26,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        new ApplicationsRequest().requestApplications(new ApplicationsRequest.ApplicationCallback() {
-            @Override
-            public void onSuccess(DataBody data) {
-                List<Category> categoryList = data.getCategoriesList();
-                List<Application> applicationList = data.getApplicationsList();
-            }
-
-            @Override
-            public void onError(Throwable throwable) {
-
-            }
-        });
+        ApplicationsRequest.requestApplications(new ApplicationRequestCallback());
     }
 
     @Override
@@ -104,5 +86,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private static class ApplicationRequestCallback implements ApplicationsRequest.ApplicationCallback {
+
+        @Override
+        public void onSuccess(DataBody data) {
+
+        }
+
+        @Override
+        public void onError(Throwable throwable) {
+
+        }
     }
 }
