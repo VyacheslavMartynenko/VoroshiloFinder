@@ -11,10 +11,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.finder.voroshilo.R;
+import com.finder.voroshilo.model.networking.data.Application;
+import com.finder.voroshilo.model.networking.data.Category;
 import com.finder.voroshilo.model.networking.data.DataBody;
 import com.finder.voroshilo.networking.request.ApplicationsRequest;
 
+import java.lang.ref.WeakReference;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private List<Category> categoryList;
+    private List<Application> applicationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ApplicationsRequest.requestApplications(new ApplicationRequestCallback());
+        ApplicationsRequest.requestApplications(new ApplicationRequestCallback(this));
     }
 
     @Override
@@ -89,10 +96,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private static class ApplicationRequestCallback implements ApplicationsRequest.ApplicationCallback {
+        WeakReference<MainActivity> mainActivityWeakReference;
+
+        ApplicationRequestCallback(MainActivity mainActivity) {
+            this.mainActivityWeakReference = new WeakReference<>(mainActivity);
+        }
 
         @Override
         public void onSuccess(DataBody data) {
-
+            MainActivity activity = mainActivityWeakReference.get();
+            if (activity != null) {
+                activity.categoryList = data.getCategoriesList();
+                activity.applicationList = data.getApplicationsList();
+            }
         }
 
         @Override
