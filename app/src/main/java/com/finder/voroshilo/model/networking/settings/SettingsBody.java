@@ -1,6 +1,5 @@
 package com.finder.voroshilo.model.networking.settings;
 
-import com.finder.voroshilo.model.networking.data.DataBody;
 import com.google.gson.annotations.SerializedName;
 
 public class SettingsBody {

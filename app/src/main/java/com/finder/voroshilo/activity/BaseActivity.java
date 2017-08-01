@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.appodeal.ads.Appodeal;
 import com.finder.voroshilo.application.FinderApplication;
+import com.finder.voroshilo.model.networking.settings.DataBody;
+import com.finder.voroshilo.util.preferences.UserPreferences;
 import com.startapp.android.publish.adsCommon.StartAppAd;
 import com.startapp.android.publish.adsCommon.StartAppSDK;
 
@@ -22,23 +24,23 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (FinderApplication) this.getApplicationContext();
-//        @DataBody.AdMode
-//        int adStatus = UserPreferences.getInstance().getAdStatus();
-//        switch (adStatus) {
-//            case DataBody.APPODEAL:
-//                Appodeal.disableNetwork(this, "cheetah");
-//                String appKey = "2c7b18d1306efd0ff21a20c17f85a414812a8ce62cf00af1";
-//                Appodeal.disableLocationPermissionCheck();
-//                Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL);
-//                break;
-//            case DataBody.NO:
-//                break;
-//            case DataBody.START_APP:
-//                StartAppSDK.init(this, "205295421", true);
-//                StartAppAd.disableSplash();
-//                StartAppAd.disableAutoInterstitial();
-//                break;
-//        }
+        @DataBody.AdMode
+        int adStatus = UserPreferences.getInstance().getAdStatus();
+        switch (adStatus) {
+            case DataBody.APPODEAL:
+                Appodeal.disableNetwork(this, "cheetah");
+                String appKey = "2c7b18d1306efd0ff21a20c17f85a414812a8ce62cf00af1";
+                Appodeal.disableLocationPermissionCheck();
+                Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL);
+                break;
+            case DataBody.NO:
+                break;
+            case DataBody.START_APP:
+                StartAppSDK.init(this, "205295421", true);
+                StartAppAd.disableSplash();
+                StartAppAd.disableAutoInterstitial();
+                break;
+        }
     }
 
     @Override
@@ -76,17 +78,17 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void showAd() {
-//        @DataBody.AdMode
-//        int adStatus = UserPreferences.getInstance().getAdStatus();
-//        switch (adStatus) {
-//            case DataBody.APPODEAL:
-//                Appodeal.show(this, Appodeal.INTERSTITIAL);
-//                break;
-//            case DataBody.NO:
-//                break;
-//            case DataBody.START_APP:
-//                startAppAd.showAd();
-//                break;
-//        }
+        @DataBody.AdMode
+        int adStatus = UserPreferences.getInstance().getAdStatus();
+        switch (adStatus) {
+            case DataBody.APPODEAL:
+                Appodeal.show(this, Appodeal.INTERSTITIAL);
+                break;
+            case DataBody.NO:
+                break;
+            case DataBody.START_APP:
+                startAppAd.showAd();
+                break;
+        }
     }
 }
