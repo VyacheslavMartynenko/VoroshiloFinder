@@ -14,9 +14,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.finder.voroshilo.R;
+import com.finder.voroshilo.model.networking.data.Application;
+import com.finder.voroshilo.model.networking.data.Category;
+import com.finder.voroshilo.model.networking.data.DataBody;
+import com.finder.voroshilo.networking.request.ApplicationsRequest;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,19 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        new ApplicationsRequest().requestApplications(new ApplicationsRequest.ApplicationCallback() {
+            @Override
+            public void onSuccess(DataBody data) {
+                List<Category> categoryList = data.getCategoriesList();
+                List<Application> applicationList = data.getApplicationsList();
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+        });
     }
 
     @Override
@@ -47,16 +65,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
