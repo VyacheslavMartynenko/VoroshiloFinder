@@ -16,8 +16,6 @@ import butterknife.ButterKnife;
 
 public class BaseActivity extends AppCompatActivity {
     private FinderApplication app;
-
-    private StartAppAd startAppAd = new StartAppAd(this);
     private boolean isActivityPaused = false;
 
     @Override
@@ -29,14 +27,14 @@ public class BaseActivity extends AppCompatActivity {
         switch (adStatus) {
             case DataBody.APPODEAL:
                 Appodeal.disableNetwork(this, "cheetah");
-                String appKey = "2c7b18d1306efd0ff21a20c17f85a414812a8ce62cf00af1";
+                String appKey = "fee50c333ff3825fd6ad6d38cff78154de3025546d47a84f";
                 Appodeal.disableLocationPermissionCheck();
                 Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL);
                 break;
             case DataBody.NO:
                 break;
             case DataBody.START_APP:
-                StartAppSDK.init(this, "205295421", true);
+                StartAppSDK.init(this, "Your Api Key", true);
                 StartAppAd.disableSplash();
                 StartAppAd.disableAutoInterstitial();
                 break;
@@ -87,7 +85,7 @@ public class BaseActivity extends AppCompatActivity {
             case DataBody.NO:
                 break;
             case DataBody.START_APP:
-                startAppAd.showAd();
+                StartAppAd.showAd(getApplicationContext());
                 break;
         }
     }
