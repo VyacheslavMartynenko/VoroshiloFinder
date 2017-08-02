@@ -1,12 +1,14 @@
 package com.finder.voroshilo.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -17,10 +19,13 @@ import com.finder.voroshilo.model.networking.data.DataBody;
 import com.finder.voroshilo.networking.request.ApplicationsRequest;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private List<Category> categoryList;
+    private HashMap<String, Integer> categoryMap;
     private List<Application> applicationList;
 
     @Override
@@ -39,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if (categoryList == null || applicationList == null) {
+        if (categoryMap == null || applicationList == null) {
             ApplicationsRequest.requestApplications(new ApplicationRequestCallback(this));
         }
     }
@@ -54,43 +59,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        String title = item.getTitle().toString();
+        int categoryId = categoryMap.get(title);
+        Log.e("Id", String.valueOf(categoryId));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -108,7 +82,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public void onSuccess(DataBody data) {
             MainActivity activity = mainActivityWeakReference.get();
             if (activity != null) {
-                activity.categoryList = data.getCategoriesList();
+                NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
+                Menu menu = navigationView.getMenu();
+
+                List<Category> categoryList = data.getCategoriesList();
+                activity.categoryMap = new HashMap<>(categoryList.size());
+                for (Category category : categoryList) {
+                    activity.categoryMap.put(category.getTitle(), category.getId());
+                    menu.add(R.id.category_group, Menu.NONE, Menu.NONE, category.getTitle()).setCheckable(true);
+                }
                 activity.applicationList = data.getApplicationsList();
             }
         }
