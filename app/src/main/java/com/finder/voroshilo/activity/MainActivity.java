@@ -7,30 +7,32 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.finder.voroshilo.R;
+import com.finder.voroshilo.adapter.ApplicationAdapter;
 import com.finder.voroshilo.model.networking.data.Application;
 import com.finder.voroshilo.model.networking.data.Category;
 import com.finder.voroshilo.model.networking.data.DataBody;
 import com.finder.voroshilo.networking.request.ApplicationsRequest;
 
 import java.lang.ref.WeakReference;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import butterknife.BindView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private HashMap<String, Integer> categoryMap;
     private List<Application> applicationList;
+    private ApplicationAdapter applicationAdapter = new ApplicationAdapter(Collections.emptyList());
 
-    @BindView(R.id.recycle_view_application)
-    RecyclerView recyclerViewApplication;
+    private RecyclerView recyclerViewApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        recyclerViewApplication = (RecyclerView) findViewById(R.id.recycle_view_application);
+        recyclerViewApplication.setAdapter(applicationAdapter);
+        recyclerViewApplication.setLayoutManager(new LinearLayoutManager(this));
+        ((SimpleItemAnimator) recyclerViewApplication.getItemAnimator()).setSupportsChangeAnimations(false);
         if (categoryMap == null || applicationList == null) {
             ApplicationsRequest.requestApplications(new ApplicationRequestCallback(this));
         }
@@ -68,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         String title = item.getTitle().toString();
         int categoryId = categoryMap.get(title);
-        Log.e("Id", String.valueOf(categoryId));
+        
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
