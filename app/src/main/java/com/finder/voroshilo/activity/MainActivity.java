@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -19,14 +20,17 @@ import com.finder.voroshilo.model.networking.data.DataBody;
 import com.finder.voroshilo.networking.request.ApplicationsRequest;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import butterknife.BindView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private HashMap<String, Integer> categoryMap;
     private List<Application> applicationList;
+
+    @BindView(R.id.recycle_view_application)
+    RecyclerView recyclerViewApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
