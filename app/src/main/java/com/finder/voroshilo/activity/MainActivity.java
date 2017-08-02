@@ -11,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,16 +22,14 @@ import com.finder.voroshilo.model.networking.data.DataBody;
 import com.finder.voroshilo.networking.request.ApplicationsRequest;
 
 import java.lang.ref.WeakReference;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private HashMap<String, Integer> categoryMap;
     private List<Application> applicationList;
-    private ApplicationAdapter applicationAdapter = new ApplicationAdapter(Collections.emptyList());
-
-    private RecyclerView recyclerViewApplication;
+    private ApplicationAdapter applicationAdapter = new ApplicationAdapter(new ArrayList<>());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        recyclerViewApplication = (RecyclerView) findViewById(R.id.recycle_view_application);
+        RecyclerView recyclerViewApplication = (RecyclerView) findViewById(R.id.recycle_view_application);
         recyclerViewApplication.setAdapter(applicationAdapter);
         recyclerViewApplication.setLayoutManager(new LinearLayoutManager(this));
         ((SimpleItemAnimator) recyclerViewApplication.getItemAnimator()).setSupportsChangeAnimations(false);
@@ -74,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         String title = item.getTitle().toString();
         int categoryId = categoryMap.get(title);
-        
+        applicationAdapter.updateApplicationList(indexOfAll(categoryId, applicationList));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -109,5 +106,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public void onError(Throwable throwable) {
 
         }
+    }
+
+    private List<Application> indexOfAll(int categoryId, List<Application> applicationList) {
+        ArrayList<Application> indexList = new ArrayList<>();
+        for (Application application : applicationList) {
+            if (application.getCategoryId() == categoryId) {
+                indexList.add(application);
+            }
+        }
+        return indexList;
     }
 }

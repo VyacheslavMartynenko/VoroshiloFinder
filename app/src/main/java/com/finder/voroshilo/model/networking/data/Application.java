@@ -19,15 +19,15 @@ public class Application {
     private Double rating;
 
     @SerializedName("category_id")
-    private Integer id;
+    private Integer categoryId;
 
-    public Application(String title, String iconUrl, String packageName, String developerName, Double rating, Integer id) {
+    public Application(String title, String iconUrl, String packageName, String developerName, Double rating, Integer categoryId) {
         this.title = title;
         this.iconUrl = iconUrl;
         this.packageName = packageName;
         this.developerName = developerName;
         this.rating = rating;
-        this.id = id;
+        this.categoryId = categoryId;
     }
 
     public String getTitle() {
@@ -70,11 +70,11 @@ public class Application {
         this.rating = rating;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 }
