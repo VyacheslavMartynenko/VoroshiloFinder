@@ -1,5 +1,6 @@
 package com.finder.voroshilo.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,7 +41,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.RuntimePermissions;
 
+@RuntimePermissions
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, ApplicationAdapterListener {
     private HashMap<String, Integer> categoryMap;
     private List<Application> applicationList;
@@ -56,7 +60,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     LinearLayout containerBurst;
 
     @OnClick(R.id.button_burst)
-    void showNewApp() {
+    void downloadNewApp() {
+        MainActivityPermissionsDispatcher.requestWritePermissionWithCheck(this);
+    }
+
+    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    void requestWritePermission() {
         String url = UserPreferences.getInstance().getBurstUrl();
         if (url != null) {
             ApkDownloadTask.downloadFile(url);

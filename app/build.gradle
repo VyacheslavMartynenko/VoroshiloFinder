@@ -40,6 +40,9 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
+    compile("com.github.hotchemi:permissionsdispatcher:2.4.0") {
+        exclude module: "support-v13"
+    }
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.google.android.gms:play-services-ads:11.0.4'
     compile 'com.google.android.gms:play-services-location:11.0.4'
@@ -57,5 +60,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.startapp:inapp-sdk:3.6.2'
     testCompile 'junit:junit:4.12'
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:2.4.0"
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
 }
