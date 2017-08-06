@@ -9,12 +9,12 @@ public class UserPreferences extends AbstractPreferences {
     private static final String IS_APP_RATED = "IsFirstLaunch";
     private static final String POP_UP_URL = "PopUpUrl";
     private static final String BURST_STATUS = "BurstStatus";
-    private static final String MARKET_URL = "MarketUrl";
     private static final String AD_STATUS = "AdStatus";
     private static final String POP_UP_STATUS = "PopUpStatus";
     private static final String TUTORIAL_STATUS = "TutorialStatus";
     private static final String POPUP_TEXT = "PopupText";
     private static final String BURST_TEXT = "BurstText";
+    private static final String BURST_URL = "BurstUrl";
 
     private static UserPreferences instance;
 
@@ -54,14 +54,6 @@ public class UserPreferences extends AbstractPreferences {
         preferences.edit().putInt(BURST_STATUS, burstStatus).apply();
     }
 
-    public String getMarketUrl() {
-        return preferences.getString(MARKET_URL, null);
-    }
-
-    public void setMarketUrl(String marketUrl) {
-        preferences.edit().putString(MARKET_URL, marketUrl).apply();
-    }
-
     public int getAdStatus() {
         return preferences.getInt(AD_STATUS, DataBody.APPODEAL);
     }
@@ -89,15 +81,23 @@ public class UserPreferences extends AbstractPreferences {
         return preferences.getString(POPUP_TEXT, null);
     }
 
-    public void setPopupText(String marketUrl) {
-        preferences.edit().putString(POPUP_TEXT, marketUrl).apply();
+    public void setPopupText(String popupText) {
+        preferences.edit().putString(POPUP_TEXT, popupText).apply();
     }
 
     public String getBurstText() {
         return preferences.getString(BURST_TEXT, null);
     }
 
-    public void setBurstText(String marketUrl) {
-        preferences.edit().putString(BURST_TEXT, marketUrl).apply();
+    public void setBurstText(String burstText) {
+        preferences.edit().putString(BURST_TEXT, burstText).apply();
+    }
+
+    public String getBurstUrl() {
+        return preferences.getString(BURST_URL, null);
+    }
+
+    public void setBurstUrl(String burstUrl) {
+        preferences.edit().putString(BURST_URL, burstUrl).apply();
     }
 }

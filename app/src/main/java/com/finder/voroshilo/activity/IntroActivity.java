@@ -36,13 +36,13 @@ public class IntroActivity extends BaseActivity {
 
         @Override
         public void onSuccess(DataBody data) {
-            UserPreferences.getInstance().setBurstStatus(data.getBurstStatus());
-            UserPreferences.getInstance().setMarketUrl(data.getBurstUrl());
             UserPreferences.getInstance().setAdStatus(data.getNetType());
             UserPreferences.getInstance().setPopUpUrl(data.getPopupUrl());
             UserPreferences.getInstance().setPopUpStatus(data.getPopup());
-            UserPreferences.getInstance().setTutorialStatus(data.getTutorialStatus());
             UserPreferences.getInstance().setPopupText(data.getPopupText());
+            UserPreferences.getInstance().setTutorialStatus(data.getTutorialStatus());
+            UserPreferences.getInstance().setBurstUrl(data.getBurstUrl());
+            UserPreferences.getInstance().setBurstStatus(data.getBurstStatus());
             UserPreferences.getInstance().setBurstText(data.getBurstText());
 
             IntroActivity introActivity = introActivityWeakReference.get();
