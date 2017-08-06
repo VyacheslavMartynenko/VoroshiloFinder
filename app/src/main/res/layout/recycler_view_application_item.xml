@@ -1,23 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:layout_height="100dp"
     android:padding="@dimen/finder_button_margin">
 
     <ImageView
         android:id="@+id/image_view_application_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/finder_button_margin"
+        android:layout_marginRight="@dimen/finder_button_margin"
         android:contentDescription="@string/application_icon" />
 
     <TextView
         android:id="@+id/text_view_application_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/finder_button_margin"
-        android:layout_marginStart="@dimen/finder_button_margin"
-        android:gravity="center_vertical" />
+        android:layout_toEndOf="@+id/image_view_application_icon"
+        android:layout_toRightOf="@+id/image_view_application_icon"
+        android:textColor="@color/colorText"
+        android:textSize="14sp" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/text_view_developer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_view_application_title"
+        android:layout_alignStart="@+id/text_view_application_title"
+        android:layout_below="@+id/text_view_application_title"
+        android:layout_gravity="center_vertical"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/text_view_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_view_developer_name"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/text_view_developer_name"
+        android:layout_below="@+id/text_view_developer_name"
+        android:gravity="bottom" />
+
+    <TextView
+        android:id="@+id/text_view_installed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/install_status"
+        android:textAllCaps="true"
+        android:textColor="@color/colorSuccess"
+        android:visibility="gone" />
+
+</RelativeLayout>
