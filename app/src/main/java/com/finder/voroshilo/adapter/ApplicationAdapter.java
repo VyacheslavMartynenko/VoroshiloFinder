@@ -9,15 +9,18 @@ import android.widget.TextView;
 
 import com.finder.voroshilo.R;
 import com.finder.voroshilo.application.FinderApplication;
+import com.finder.voroshilo.interfaces.ApplicationAdapterListener;
 import com.finder.voroshilo.model.networking.data.Application;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.ApplicationViewHolder> {
+    private ApplicationAdapterListener listener;
     private List<Application> applicationList;
 
-    public ApplicationAdapter(List<Application> applicationList) {
+    public ApplicationAdapter(ApplicationAdapterListener listener, List<Application> applicationList) {
+        this.listener = listener;
         this.applicationList = applicationList;
     }
 
@@ -27,14 +30,24 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
         notifyDataSetChanged();
     }
 
-    class ApplicationViewHolder extends RecyclerView.ViewHolder {
+    class ApplicationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageViewApplicationIcon;
         TextView textViewApplicationTitle;
 
-        public ApplicationViewHolder(View itemView) {
+        ApplicationViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             imageViewApplicationIcon = itemView.findViewById(R.id.image_view_application_icon);
             textViewApplicationTitle = itemView.findViewById(R.id.text_view_application_title);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (listener != null) {
+                Application application = applicationList.get(getAdapterPosition());
+                String appPackageName = application.getPackageName();
+                listener.showAppInMarket(appPackageName);
+            }
         }
     }
 

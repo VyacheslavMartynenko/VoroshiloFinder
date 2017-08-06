@@ -1,5 +1,7 @@
 package com.finder.voroshilo.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -16,6 +18,7 @@ import android.view.MenuItem;
 
 import com.finder.voroshilo.R;
 import com.finder.voroshilo.adapter.ApplicationAdapter;
+import com.finder.voroshilo.interfaces.ApplicationAdapterListener;
 import com.finder.voroshilo.model.networking.data.Application;
 import com.finder.voroshilo.model.networking.data.Category;
 import com.finder.voroshilo.model.networking.data.DataBody;
@@ -26,10 +29,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ApplicationAdapterListener {
     private HashMap<String, Integer> categoryMap;
     private List<Application> applicationList;
-    private ApplicationAdapter applicationAdapter = new ApplicationAdapter(new ArrayList<>());
+    private ApplicationAdapter applicationAdapter = new ApplicationAdapter(this, new ArrayList<>());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void showAppInMarket(String appPackageName) {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
     }
 
     private static class ApplicationRequestCallback implements ApplicationsRequest.ApplicationCallback {
