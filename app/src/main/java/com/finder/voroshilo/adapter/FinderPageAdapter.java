@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.finder.voroshilo.fragment.enter.EnterFragment;
-import com.finder.voroshilo.fragment.enter.SmartFragmentStatePagerAdapter;
 
 public class FinderPageAdapter extends SmartFragmentStatePagerAdapter {
     private final static int NUM_ITEMS = 3;

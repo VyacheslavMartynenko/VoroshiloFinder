@@ -14,7 +14,7 @@ import com.startapp.android.publish.adsCommon.StartAppSDK;
 
 import butterknife.ButterKnife;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     private FinderApplication app;
     private boolean isActivityPaused = false;
 
