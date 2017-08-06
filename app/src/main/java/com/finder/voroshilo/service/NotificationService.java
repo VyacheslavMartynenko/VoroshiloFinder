@@ -33,11 +33,11 @@ public class NotificationService extends IntentService {
 
     private void showFolder(String path) {
         File file = new File(path);
-        Uri uri = FileProvider.getUriForFile(FinderApplication.getInstance().getApplicationContext(),
-                "com.voroshilo.finder.fileProvider", file);
+//        Uri uri = FileProvider.getUriForFile(FinderApplication.getInstance().getApplicationContext(),
+//                "com.voroshilo.finder.fileProvider", file);
 
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setDataAndType(uri, "*/*");
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
         Intent chooserIntent = Intent.createChooser(intent, "Open").setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         if (chooserIntent.resolveActivityInfo(getPackageManager(), 0) != null) {
