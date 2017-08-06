@@ -52,8 +52,8 @@
             android:textSize="12sp" />
 
         <ImageView
-            android:layout_width="10dp"
-            android:layout_height="10dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:src="@drawable/ic_star" />
 
     </LinearLayout>
@@ -69,7 +69,6 @@
         android:gravity="bottom"
         android:text="@string/install_status"
         android:textAllCaps="true"
-        android:textColor="@color/colorSuccess"
-        android:visibility="invisible" />
+        android:textColor="@color/colorSuccess" />
 
 </RelativeLayout>
