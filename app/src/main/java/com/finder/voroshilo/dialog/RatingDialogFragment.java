@@ -18,17 +18,6 @@ import butterknife.OnClick;
 
 public class RatingDialogFragment extends BaseDialogFragment {
     private static final int MIN_RATING_MARKET = 4;
-    private static final String MARKET_URL = "free.mp3.musicdownloadmp3.market";
-
-    public static RatingDialogFragment newInstance(String url) {
-
-        Bundle args = new Bundle();
-        args.putString(MARKET_URL, url);
-
-        RatingDialogFragment fragment = new RatingDialogFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @BindView(R.id.rating_bar)
     RatingBar ratingBar;
@@ -63,12 +52,9 @@ public class RatingDialogFragment extends BaseDialogFragment {
     }
 
     private void openAppInMarket() {
-        Bundle arguments = getArguments();
-        if (arguments != null) {
-            String marketUrl = arguments.getString(MARKET_URL);
-            if (marketUrl != null) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(marketUrl)));
-            }
+        String marketUrl = UserPreferences.getInstance().getPopUpUrl();
+        if (marketUrl != null) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(marketUrl)));
         }
     }
 }

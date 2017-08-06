@@ -148,8 +148,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (UserPreferences.getInstance().getPopUpStatus() != 0) {
             boolean isAppRated = UserPreferences.getInstance().isAppRated();
             if (MainActivity.this.isVisible() && !isAppRated) {
-                String popUpUrl = UserPreferences.getInstance().getPopUpUrl();
-                RatingDialogFragment dialog = RatingDialogFragment.newInstance(popUpUrl);
+                RatingDialogFragment dialog = new RatingDialogFragment();
                 dialog.show(getSupportFragmentManager(), "rating");
             }
         }
