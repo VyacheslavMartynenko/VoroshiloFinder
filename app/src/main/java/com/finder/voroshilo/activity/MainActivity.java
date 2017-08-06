@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
@@ -77,6 +78,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         recyclerViewApplication.setAdapter(applicationAdapter);
         recyclerViewApplication.setLayoutManager(new LinearLayoutManager(this));
         ((SimpleItemAnimator) recyclerViewApplication.getItemAnimator()).setSupportsChangeAnimations(false);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerViewApplication.addItemDecoration(itemDecoration);
 
         setUpScreen();
 
