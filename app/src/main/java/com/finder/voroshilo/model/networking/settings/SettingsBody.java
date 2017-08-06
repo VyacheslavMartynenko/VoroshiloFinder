@@ -7,9 +7,9 @@ public class SettingsBody {
     private String result;
 
     @SerializedName("data")
-    private DataBody data;
+    private SettingsDataBody data;
 
-    public SettingsBody(String result, DataBody data) {
+    public SettingsBody(String result, SettingsDataBody data) {
         this.result = result;
         this.data = data;
     }
@@ -22,11 +22,11 @@ public class SettingsBody {
         this.result = result;
     }
 
-    public DataBody getData() {
+    public SettingsDataBody getData() {
         return data;
     }
 
-    public void setData(DataBody data) {
+    public void setData(SettingsDataBody data) {
         this.data = data;
     }
 }

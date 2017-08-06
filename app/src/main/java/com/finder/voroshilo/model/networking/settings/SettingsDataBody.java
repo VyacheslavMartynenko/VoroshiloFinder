@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public class DataBody {
+public class SettingsDataBody {
     public static final int NO = 0;
     public static final int START_APP = 1;
     public static final int APPODEAL = 2;
@@ -41,7 +41,7 @@ public class DataBody {
     @SerializedName("show_tutorial")
     private int tutorialStatus;
 
-    public DataBody(int netType, int popup, String popupText, String popupUrl, int burstStatus, String burstText, String burstUrl, int tutorialStatus) {
+    public SettingsDataBody(int netType, int popup, String popupText, String popupUrl, int burstStatus, String burstText, String burstUrl, int tutorialStatus) {
         this.netType = netType;
         this.popup = popup;
         this.popupText = popupText;

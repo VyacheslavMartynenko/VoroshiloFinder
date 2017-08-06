@@ -4,14 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class DataBody {
+public class ApplicationsDataBody {
     @SerializedName("categories")
     List<Category> categoriesList;
 
     @SerializedName("apps")
     List<Application> applicationsList;
 
-    public DataBody(List<Category> categoriesList, List<Application> applicationsList) {
+    public ApplicationsDataBody(List<Category> categoriesList, List<Application> applicationsList) {
         this.categoriesList = categoriesList;
         this.applicationsList = applicationsList;
     }

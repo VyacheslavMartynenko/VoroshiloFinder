@@ -7,9 +7,9 @@ public class MainDataBody {
     private String result;
 
     @SerializedName("data")
-    private DataBody data;
+    private ApplicationsDataBody data;
 
-    public MainDataBody(String result, DataBody data) {
+    public MainDataBody(String result, ApplicationsDataBody data) {
         this.result = result;
         this.data = data;
     }
@@ -22,11 +22,11 @@ public class MainDataBody {
         this.result = result;
     }
 
-    public DataBody getData() {
+    public ApplicationsDataBody getData() {
         return data;
     }
 
-    public void setData(DataBody data) {
+    public void setData(ApplicationsDataBody data) {
         this.data = data;
     }
 }

@@ -23,7 +23,8 @@ import com.finder.voroshilo.dialog.RatingDialogFragment;
 import com.finder.voroshilo.interfaces.ApplicationAdapterListener;
 import com.finder.voroshilo.model.networking.data.Application;
 import com.finder.voroshilo.model.networking.data.Category;
-import com.finder.voroshilo.model.networking.data.DataBody;
+import com.finder.voroshilo.model.networking.data.ApplicationsDataBody;
+import com.finder.voroshilo.model.networking.settings.SettingsDataBody;
 import com.finder.voroshilo.networking.request.ApplicationsRequest;
 import com.finder.voroshilo.util.preferences.UserPreferences;
 
@@ -114,7 +115,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
 
         @Override
-        public void onSuccess(DataBody data) {
+        public void onSuccess(ApplicationsDataBody data) {
             MainActivity activity = mainActivityWeakReference.get();
             if (activity != null) {
                 NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
@@ -145,6 +146,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void setUpScreen() {
+        if (UserPreferences.getInstance().getBurstStatus() != SettingsDataBody.NO) {
+                
+        }
+
         if (UserPreferences.getInstance().getPopUpStatus() != 0) {
             boolean isAppRated = UserPreferences.getInstance().isAppRated();
             if (MainActivity.this.isVisible() && !isAppRated) {

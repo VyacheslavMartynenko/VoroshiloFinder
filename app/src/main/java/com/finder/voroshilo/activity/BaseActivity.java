@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.appodeal.ads.Appodeal;
 import com.finder.voroshilo.application.FinderApplication;
-import com.finder.voroshilo.model.networking.settings.DataBody;
+import com.finder.voroshilo.model.networking.settings.SettingsDataBody;
 import com.finder.voroshilo.util.preferences.UserPreferences;
 import com.startapp.android.publish.adsCommon.StartAppAd;
 import com.startapp.android.publish.adsCommon.StartAppSDK;
@@ -22,18 +22,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (FinderApplication) this.getApplicationContext();
-        @DataBody.AdMode
+        @SettingsDataBody.AdMode
         int adStatus = UserPreferences.getInstance().getAdStatus();
         switch (adStatus) {
-            case DataBody.APPODEAL:
+            case SettingsDataBody.APPODEAL:
                 Appodeal.disableNetwork(this, "cheetah");
                 String appKey = "fee50c333ff3825fd6ad6d38cff78154de3025546d47a84f";
                 Appodeal.disableLocationPermissionCheck();
                 Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL);
                 break;
-            case DataBody.NO:
+            case SettingsDataBody.NO:
                 break;
-            case DataBody.START_APP:
+            case SettingsDataBody.START_APP:
                 StartAppSDK.init(this, "Your Api Key", true);
                 StartAppAd.disableSplash();
                 StartAppAd.disableAutoInterstitial();
@@ -76,15 +76,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void showAd() {
-        @DataBody.AdMode
+        @SettingsDataBody.AdMode
         int adStatus = UserPreferences.getInstance().getAdStatus();
         switch (adStatus) {
-            case DataBody.APPODEAL:
+            case SettingsDataBody.APPODEAL:
                 Appodeal.show(this, Appodeal.INTERSTITIAL);
                 break;
-            case DataBody.NO:
+            case SettingsDataBody.NO:
                 break;
-            case DataBody.START_APP:
+            case SettingsDataBody.START_APP:
                 StartAppAd.showAd(getApplicationContext());
                 break;
         }

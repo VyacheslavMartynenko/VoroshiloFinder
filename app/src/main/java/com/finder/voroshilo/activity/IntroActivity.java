@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.finder.voroshilo.R;
-import com.finder.voroshilo.model.networking.settings.DataBody;
+import com.finder.voroshilo.model.networking.settings.SettingsDataBody;
 import com.finder.voroshilo.networking.request.SettingsRequest;
 import com.finder.voroshilo.util.preferences.UserPreferences;
 
@@ -21,7 +21,7 @@ public class IntroActivity extends BaseActivity {
     }
 
     private void showNewActivity() {
-        Class<?> activityClass = UserPreferences.getInstance().getTutorialStatus() == DataBody.NO ? MainActivity.class : EnterActivity.class;
+        Class<?> activityClass = UserPreferences.getInstance().getTutorialStatus() == SettingsDataBody.NO ? MainActivity.class : EnterActivity.class;
         Intent intent = new Intent(this, activityClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -35,7 +35,7 @@ public class IntroActivity extends BaseActivity {
         }
 
         @Override
-        public void onSuccess(DataBody data) {
+        public void onSuccess(SettingsDataBody data) {
             UserPreferences.getInstance().setAdStatus(data.getNetType());
             UserPreferences.getInstance().setPopUpUrl(data.getPopupUrl());
             UserPreferences.getInstance().setPopUpStatus(data.getPopup());

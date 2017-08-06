@@ -2,7 +2,7 @@ package com.finder.voroshilo.util.preferences;
 
 import android.content.Context;
 
-import com.finder.voroshilo.model.networking.settings.DataBody;
+import com.finder.voroshilo.model.networking.settings.SettingsDataBody;
 
 public class UserPreferences extends AbstractPreferences {
     private static final String PREFERENCES = "UserPreferences";
@@ -47,7 +47,7 @@ public class UserPreferences extends AbstractPreferences {
     }
 
     public int getBurstStatus() {
-        return preferences.getInt(BURST_STATUS, DataBody.NO);
+        return preferences.getInt(BURST_STATUS, SettingsDataBody.NO);
     }
 
     public void setBurstStatus(int burstStatus) {
@@ -55,7 +55,7 @@ public class UserPreferences extends AbstractPreferences {
     }
 
     public int getAdStatus() {
-        return preferences.getInt(AD_STATUS, DataBody.APPODEAL);
+        return preferences.getInt(AD_STATUS, SettingsDataBody.APPODEAL);
     }
 
     public void setAdStatus(int adStatus) {
@@ -63,14 +63,14 @@ public class UserPreferences extends AbstractPreferences {
     }
 
     public int getPopUpStatus() {
-        return preferences.getInt(POP_UP_STATUS, DataBody.APPODEAL);
+        return preferences.getInt(POP_UP_STATUS, SettingsDataBody.APPODEAL);
     }
 
     public void setPopUpStatus(int popUpStatus) {
         preferences.edit().putInt(POP_UP_STATUS, popUpStatus).apply();
     }
     public int getTutorialStatus() {
-        return preferences.getInt(TUTORIAL_STATUS, DataBody.NO);
+        return preferences.getInt(TUTORIAL_STATUS, SettingsDataBody.NO);
     }
 
     public void setTutorialStatus(int tutorialStatus) {

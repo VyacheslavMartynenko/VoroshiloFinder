@@ -2,7 +2,7 @@ package com.finder.voroshilo.networking.request;
 
 import android.support.annotation.NonNull;
 
-import com.finder.voroshilo.model.networking.data.DataBody;
+import com.finder.voroshilo.model.networking.data.ApplicationsDataBody;
 import com.finder.voroshilo.model.networking.data.MainDataBody;
 import com.finder.voroshilo.networking.ApiBuilder;
 
@@ -12,7 +12,7 @@ import retrofit2.Response;
 
 public class ApplicationsRequest {
     public interface ApplicationCallback {
-        void onSuccess(DataBody data);
+        void onSuccess(ApplicationsDataBody data);
 
         void onError(Throwable throwable);
     }
@@ -24,8 +24,8 @@ public class ApplicationsRequest {
                 if (response.isSuccessful()) {
                     MainDataBody mainDataBody = response.body();
                     if (mainDataBody != null) {
-                        DataBody dataBody = mainDataBody.getData();
-                        callback.onSuccess(dataBody);
+                        ApplicationsDataBody applicationsDataBody = mainDataBody.getData();
+                        callback.onSuccess(applicationsDataBody);
                     } else {
                         callback.onError(new NullPointerException());
                     }
