@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import static android.view.View.GONE;
+import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
 public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.ApplicationViewHolder> {
@@ -86,7 +87,7 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
         holder.textViewApplicationTitle.setText(application.getTitle());
         holder.textViewDeveloperName.setText(application.getDeveloperName());
         holder.textViewRating.setText(String.valueOf(application.getRating()));
-        int visibility = isPackageInstalled(holder.itemView.getContext(), application.getPackageName()) ? VISIBLE : GONE;
+        int visibility = isPackageInstalled(holder.itemView.getContext(), application.getPackageName()) ? VISIBLE : INVISIBLE;
         holder.textViewInstalled.setVisibility(visibility);
         Picasso.with(FinderApplication.getInstance().getApplicationContext())
                 .load(application.getIconUrl()).fit().centerCrop()
