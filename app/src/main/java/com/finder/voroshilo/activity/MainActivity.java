@@ -15,6 +15,8 @@ import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.finder.voroshilo.R;
 import com.finder.voroshilo.adapter.ApplicationAdapter;
@@ -30,6 +32,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ApplicationAdapterListener {
+    private ProgressBar progressBarDownload;
+
     private HashMap<String, Integer> categoryMap;
     private List<Application> applicationList;
     private ApplicationAdapter applicationAdapter = new ApplicationAdapter(this, new ArrayList<>());
@@ -54,7 +58,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerViewApplication.setAdapter(applicationAdapter);
         recyclerViewApplication.setLayoutManager(new LinearLayoutManager(this));
         ((SimpleItemAnimator) recyclerViewApplication.getItemAnimator()).setSupportsChangeAnimations(false);
+
+        progressBarDownload = (ProgressBar) findViewById(R.id.progress_bar_download);
         if (categoryMap == null || applicationList == null) {
+            if (progressBarDownload.getVisibility() == View.GONE) {
+                progressBarDownload.setVisibility(View.VISIBLE);
+            }
             ApplicationsRequest.requestApplications(new ApplicationRequestCallback(this));
         }
     }
@@ -115,6 +124,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 MenuItem menuItem = menu.getItem(0);
                 if (menuItem != null) {
                     activity.onNavigationItemSelected(menuItem);
+                }
+                if (activity.progressBarDownload.getVisibility() == View.VISIBLE) {
+                    activity.progressBarDownload.setVisibility(View.GONE);
                 }
             }
         }
