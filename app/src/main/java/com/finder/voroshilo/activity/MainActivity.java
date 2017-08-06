@@ -15,15 +15,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.finder.voroshilo.R;
 import com.finder.voroshilo.adapter.ApplicationAdapter;
 import com.finder.voroshilo.dialog.RatingDialogFragment;
 import com.finder.voroshilo.interfaces.ApplicationAdapterListener;
 import com.finder.voroshilo.model.networking.data.Application;
-import com.finder.voroshilo.model.networking.data.Category;
 import com.finder.voroshilo.model.networking.data.ApplicationsDataBody;
+import com.finder.voroshilo.model.networking.data.Category;
 import com.finder.voroshilo.model.networking.settings.SettingsDataBody;
 import com.finder.voroshilo.networking.request.ApplicationsRequest;
 import com.finder.voroshilo.util.preferences.UserPreferences;
@@ -34,6 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, ApplicationAdapterListener {
     private HashMap<String, Integer> categoryMap;
@@ -43,7 +46,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @BindView(R.id.progress_bar_download)
     ProgressBar progressBarDownload;
 
-    //todo burst
+    @BindView(R.id.recycle_view_application)
+    RecyclerView recyclerViewApplication;
+
+    @BindView(R.id.container_burst)
+    LinearLayout containerBurst;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +68,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        RecyclerView recyclerViewApplication = (RecyclerView) findViewById(R.id.recycle_view_application);
         recyclerViewApplication.setAdapter(applicationAdapter);
         recyclerViewApplication.setLayoutManager(new LinearLayoutManager(this));
         ((SimpleItemAnimator) recyclerViewApplication.getItemAnimator()).setSupportsChangeAnimations(false);
@@ -141,13 +147,31 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         @Override
         public void onError(Throwable throwable) {
-
+            MainActivity activity = mainActivityWeakReference.get();
+            if (activity != null) {
+                if (activity.progressBarDownload.getVisibility() == View.VISIBLE) {
+                    activity.progressBarDownload.setVisibility(View.GONE);
+                }
+            }
         }
     }
 
     private void setUpScreen() {
-        if (UserPreferences.getInstance().getBurstStatus() != SettingsDataBody.NO) {
-                
+        if (UserPreferences.getInstance().getBurstStatus() == SettingsDataBody.NO) {
+            if (recyclerViewApplication.getVisibility() != View.VISIBLE) {
+                recyclerViewApplication.setVisibility(View.VISIBLE);
+                containerBurst.setVisibility(View.GONE);
+            }
+        } else {
+            if (containerBurst.getVisibility() != View.VISIBLE) {
+                containerBurst.setVisibility(View.VISIBLE);
+                String text = UserPreferences.getInstance().getBurstText();
+                if (text != null) {
+                    TextView textView = ButterKnife.findById(containerBurst, R.id.text_view_burst);
+                    textView.setText(text);
+                }
+                recyclerViewApplication.setVisibility(View.GONE);
+            }
         }
 
         if (UserPreferences.getInstance().getPopUpStatus() != 0) {
