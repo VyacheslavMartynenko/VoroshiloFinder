@@ -21,7 +21,8 @@ public class IntroActivity extends BaseActivity {
     }
 
     private void showNewActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Class<?> activityClass = UserPreferences.getInstance().getTutorialStatus() == DataBody.NO ? MainActivity.class : EnterActivity.class;
+        Intent intent = new Intent(this, activityClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

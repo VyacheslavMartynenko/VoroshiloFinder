@@ -4,6 +4,13 @@
     <!-- IntroActivity -->
     <string name="progress_text">Updating preferences…</string>
 
+    <!-- EnterActivity -->
+    <string name="next">Next</string>
+    <string name="open_application">Open Application</string>
+    <string name="enter_text_first">Explore Applications</string>
+    <string name="enter_text_second">Download Latest Versions</string>
+    <string name="enter_text_third">Best Services In Your Pocket</string>
+
     <!-- MainActivity -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
