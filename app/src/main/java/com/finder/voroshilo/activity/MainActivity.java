@@ -112,7 +112,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     activity.categoryMap.put(category.getTitle(), category.getId());
                     menu.add(R.id.category_group, Menu.NONE, Menu.NONE, category.getTitle()).setCheckable(true);
                 }
-                activity.onNavigationItemSelected(menu.getItem(0));
+                MenuItem menuItem = menu.getItem(0);
+                if (menuItem != null) {
+                    activity.onNavigationItemSelected(menuItem);
+                }
             }
         }
 
