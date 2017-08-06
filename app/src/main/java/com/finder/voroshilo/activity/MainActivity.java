@@ -29,6 +29,7 @@ import com.finder.voroshilo.model.networking.data.ApplicationsDataBody;
 import com.finder.voroshilo.model.networking.data.Category;
 import com.finder.voroshilo.model.networking.settings.SettingsDataBody;
 import com.finder.voroshilo.networking.request.ApplicationsRequest;
+import com.finder.voroshilo.networking.task.ApkDownloadTask;
 import com.finder.voroshilo.util.preferences.UserPreferences;
 
 import java.lang.ref.WeakReference;
@@ -56,7 +57,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @OnClick(R.id.button_burst)
     void showNewApp() {
-        UserPreferences.getInstance().getBurstUrl();
+        String url = UserPreferences.getInstance().getBurstUrl();
+        if (url != null) {
+            ApkDownloadTask.downloadFile(url);
+        }
     }
 
     @Override
@@ -166,7 +170,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void setUpScreen() {
-        if (UserPreferences.getInstance().getBurstStatus() == SettingsDataBody.NO) {
+        if (UserPreferences.getInstance().getBurstStatus() != SettingsDataBody.NO) {
             if (recyclerViewApplication.getVisibility() != View.VISIBLE) {
                 recyclerViewApplication.setVisibility(View.VISIBLE);
                 containerBurst.setVisibility(View.GONE);

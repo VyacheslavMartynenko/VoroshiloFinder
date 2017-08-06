@@ -45,6 +45,16 @@
             android:name="io.fabric.ApiKey"
             android:value="b3e0fc1d6b287c93771791c92573b4086655c96a" />
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.voroshilo.finder.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <!-- add elements -->
         <activity
             android:name="com.startapp.android.publish.ads.list3d.List3DActivity"

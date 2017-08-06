@@ -19,4 +19,6 @@
     <string name="application_icon">Application icon</string>
     <string name="rate">rate</string>
     <string name="download">download</string>
+    <string name="download_progress">Download</string>
+    <string name="download_complete">Download complete</string>
 </resources>
