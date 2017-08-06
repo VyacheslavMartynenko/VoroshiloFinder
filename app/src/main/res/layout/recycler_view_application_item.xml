@@ -46,6 +46,14 @@
         android:textColor="@color/colorText"
         android:textSize="12sp" />
 
+    <ImageView
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_alignBottom="@+id/text_view_rating"
+        android:layout_toEndOf="@+id/text_view_rating"
+        android:layout_toRightOf="@+id/text_view_rating"
+        android:src="@drawable/ic_star" />
+
     <TextView
         android:id="@+id/text_view_installed"
         android:layout_width="wrap_content"
