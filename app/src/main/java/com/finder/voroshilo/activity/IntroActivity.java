@@ -17,7 +17,7 @@ public class IntroActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
-        new SettingsRequest().requestSettings(new SettingsRequestCallback(this));
+        SettingsRequest.requestSettings(new SettingsRequestCallback(this));
     }
 
     private void showNewActivity() {
@@ -42,6 +42,8 @@ public class IntroActivity extends BaseActivity {
             UserPreferences.getInstance().setPopUpUrl(data.getPopupUrl());
             UserPreferences.getInstance().setPopUpStatus(data.getPopup());
             UserPreferences.getInstance().setTutorialStatus(data.getTutorialStatus());
+            UserPreferences.getInstance().setPopupText(data.getPopupText());
+            UserPreferences.getInstance().setBurstText(data.getBurstText());
 
             IntroActivity introActivity = introActivityWeakReference.get();
             if (introActivity != null) {

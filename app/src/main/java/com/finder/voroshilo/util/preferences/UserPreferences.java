@@ -13,6 +13,8 @@ public class UserPreferences extends AbstractPreferences {
     private static final String AD_STATUS = "AdStatus";
     private static final String POP_UP_STATUS = "PopUpStatus";
     private static final String TUTORIAL_STATUS = "TutorialStatus";
+    private static final String POPUP_TEXT = "PopupText";
+    private static final String BURST_TEXT = "BurstText";
 
     private static UserPreferences instance;
 
@@ -81,5 +83,21 @@ public class UserPreferences extends AbstractPreferences {
 
     public void setTutorialStatus(int tutorialStatus) {
         preferences.edit().putInt(TUTORIAL_STATUS, tutorialStatus).apply();
+    }
+
+    public String getPopupText() {
+        return preferences.getString(POPUP_TEXT, null);
+    }
+
+    public void setPopupText(String marketUrl) {
+        preferences.edit().putString(POPUP_TEXT, marketUrl).apply();
+    }
+
+    public String getBurstText() {
+        return preferences.getString(BURST_TEXT, null);
+    }
+
+    public void setBurstText(String marketUrl) {
+        preferences.edit().putString(BURST_TEXT, marketUrl).apply();
     }
 }

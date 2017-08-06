@@ -42,6 +42,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @BindView(R.id.progress_bar_download)
     ProgressBar progressBarDownload;
 
+    //todo burst
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
