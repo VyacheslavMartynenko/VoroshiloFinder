@@ -3,6 +3,7 @@ package com.finder.voroshilo.service;
 import android.app.IntentService;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 
@@ -33,11 +34,16 @@ public class NotificationService extends IntentService {
 
     private void showFolder(String path) {
         File file = new File(path);
-//        Uri uri = FileProvider.getUriForFile(FinderApplication.getInstance().getApplicationContext(),
-//                "com.voroshilo.finder.fileProvider", file);
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uri = FileProvider.getUriForFile(FinderApplication.getInstance().getApplicationContext(),
+                    "com.voroshilo.finder.fileProvider", file);
+        } else {
+            uri = Uri.fromFile(file);
+        }
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        intent.setDataAndType(uri, "application/vnd.android.package-archive");
         Intent chooserIntent = Intent.createChooser(intent, "Open").setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         if (chooserIntent.resolveActivityInfo(getPackageManager(), 0) != null) {
