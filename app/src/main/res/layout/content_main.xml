@@ -34,7 +34,7 @@
             android:layout_marginBottom="@dimen/finder_button_margin" />
 
         <Button
-            android:id="@+id/button_download"
+            android:id="@+id/button_burst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/download" />

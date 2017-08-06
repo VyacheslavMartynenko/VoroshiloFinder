@@ -37,6 +37,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, ApplicationAdapterListener {
     private HashMap<String, Integer> categoryMap;
@@ -51,6 +52,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @BindView(R.id.container_burst)
     LinearLayout containerBurst;
+
+    @OnClick(R.id.button_burst)
+    void showNewApp() {
+        UserPreferences.getInstance().getBurstUrl();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
