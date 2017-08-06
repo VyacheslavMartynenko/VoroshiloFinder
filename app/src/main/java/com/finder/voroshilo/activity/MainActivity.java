@@ -73,6 +73,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -179,7 +185,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void setUpScreen() {
-        if (UserPreferences.getInstance().getBurstStatus() != SettingsDataBody.NO) {
+        if (UserPreferences.getInstance().getBurstStatus() == SettingsDataBody.NO) {
             if (recyclerViewApplication.getVisibility() != View.VISIBLE) {
                 recyclerViewApplication.setVisibility(View.VISIBLE);
                 containerBurst.setVisibility(View.GONE);
