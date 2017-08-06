@@ -19,11 +19,12 @@ public class ApkDownloadTask {
     public static void downloadFile(String url) {
         FinderApplication finderApplication = FinderApplication.getInstance();
         String appName = finderApplication.getString(R.string.app_name);
+        String appFullName = "/" + appName + ".apk";
 
         DownloadManager dm = (DownloadManager) finderApplication.getSystemService(DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         request.setTitle(finderApplication.getString(R.string.download_progress) + appName);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, appName + ".apk");
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, appFullName);
         dm.enqueue(request);
 
         BroadcastReceiver onComplete = new BroadcastReceiver() {
@@ -31,7 +32,7 @@ public class ApkDownloadTask {
             public void onReceive(Context context, Intent intent) {
                 try {
                     NotificationUtil.showNotification(finderApplication.getString(R.string.download_complete) + appName,
-                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + appName);
+                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + appFullName);
                     finderApplication.unregisterReceiver(this);
                 } catch (Exception e) {
                     Log.e(ApkDownloadTask.class.getSimpleName(), Log.getStackTraceString(e));
