@@ -15,6 +15,8 @@ public class UserPreferences extends AbstractPreferences {
     private static final String POPUP_TEXT = "PopupText";
     private static final String BURST_TEXT = "BurstText";
     private static final String BURST_URL = "BurstUrl";
+    private static final String STARTAPP_KEY = "StartappKey";
+    private static final String APPODEAL_KEY = "AppodealKey";
 
     private static UserPreferences instance;
 
@@ -99,5 +101,21 @@ public class UserPreferences extends AbstractPreferences {
 
     public void setBurstUrl(String burstUrl) {
         preferences.edit().putString(BURST_URL, burstUrl).apply();
+    }
+
+    public String getStartappKey() {
+        return preferences.getString(STARTAPP_KEY, "1");
+    }
+
+    public void setStartappKey(String burstText) {
+        preferences.edit().putString(STARTAPP_KEY, burstText).apply();
+    }
+
+    public String getAppodealKey() {
+        return preferences.getString(APPODEAL_KEY, "1");
+    }
+
+    public void setAppodealKey(String burstUrl) {
+        preferences.edit().putString(APPODEAL_KEY, burstUrl).apply();
     }
 }

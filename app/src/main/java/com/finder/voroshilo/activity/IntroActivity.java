@@ -44,6 +44,8 @@ public class IntroActivity extends BaseActivity {
             UserPreferences.getInstance().setBurstUrl(data.getBurstUrl());
             UserPreferences.getInstance().setBurstStatus(data.getBurstStatus());
             UserPreferences.getInstance().setBurstText(data.getBurstText());
+            UserPreferences.getInstance().setStartappKey(data.getStartappKey());
+            UserPreferences.getInstance().setAppodealKey(data.getAppodealKey());
 
             IntroActivity introActivity = introActivityWeakReference.get();
             if (introActivity != null) {

@@ -27,14 +27,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         switch (adStatus) {
             case SettingsDataBody.APPODEAL:
                 Appodeal.disableNetwork(this, "cheetah");
-                String appKey = "fee50c333ff3825fd6ad6d38cff78154de3025546d47a84f";
+                String appKey = UserPreferences.getInstance().getAppodealKey();
                 Appodeal.disableLocationPermissionCheck();
                 Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL);
                 break;
             case SettingsDataBody.NO:
                 break;
             case SettingsDataBody.START_APP:
-                StartAppSDK.init(this, "Your Api Key", true);
+                StartAppSDK.init(this, UserPreferences.getInstance().getStartappKey(), true);
                 StartAppAd.disableSplash();
                 StartAppAd.disableAutoInterstitial();
                 break;

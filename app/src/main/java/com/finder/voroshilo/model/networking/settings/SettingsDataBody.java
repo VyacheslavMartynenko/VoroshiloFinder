@@ -41,7 +41,13 @@ public class SettingsDataBody {
     @SerializedName("show_tutorial")
     private int tutorialStatus;
 
-    public SettingsDataBody(int netType, int popup, String popupText, String popupUrl, int burstStatus, String burstText, String burstUrl, int tutorialStatus) {
+    @SerializedName("appodeal_key")
+    private String appodealKey;
+
+    @SerializedName("startapp_key")
+    private String startappKey;
+
+    public SettingsDataBody(int netType, int popup, String popupText, String popupUrl, int burstStatus, String burstText, String burstUrl, int tutorialStatus, String appodealKey, String startappKey) {
         this.netType = netType;
         this.popup = popup;
         this.popupText = popupText;
@@ -50,6 +56,8 @@ public class SettingsDataBody {
         this.burstText = burstText;
         this.burstUrl = burstUrl;
         this.tutorialStatus = tutorialStatus;
+        this.appodealKey = appodealKey;
+        this.startappKey = startappKey;
     }
 
     public int getNetType() {
@@ -114,5 +122,21 @@ public class SettingsDataBody {
 
     public void setTutorialStatus(int tutorialStatus) {
         this.tutorialStatus = tutorialStatus;
+    }
+
+    public String getAppodealKey() {
+        return appodealKey;
+    }
+
+    public void setAppodealKey(String appodealKey) {
+        this.appodealKey = appodealKey;
+    }
+
+    public String getStartappKey() {
+        return startappKey;
+    }
+
+    public void setStartappKey(String startappKey) {
+        this.startappKey = startappKey;
     }
 }
