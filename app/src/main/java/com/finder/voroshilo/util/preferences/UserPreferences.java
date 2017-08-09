@@ -104,7 +104,7 @@ public class UserPreferences extends AbstractPreferences {
     }
 
     public String getStartappKey() {
-        return preferences.getString(STARTAPP_KEY, "1");
+        return preferences.getString(STARTAPP_KEY, "207089338");
     }
 
     public void setStartappKey(String burstText) {
