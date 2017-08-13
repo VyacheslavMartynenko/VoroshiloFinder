@@ -112,7 +112,7 @@ public class UserPreferences extends AbstractPreferences {
     }
 
     public String getAppodealKey() {
-        return preferences.getString(APPODEAL_KEY, "1");
+        return preferences.getString(APPODEAL_KEY, "f3bd05344243630841b7a4ce38db7f2a67d1076d8233d28b");
     }
 
     public void setAppodealKey(String burstUrl) {
