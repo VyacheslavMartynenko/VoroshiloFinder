@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.finder.voroshilo">
+    package="com.aptoide.market.android.apps.games">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".application.FinderApplication"
+        android:name="com.aptoide.market.android.apps.games.application.FinderApplication"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.IntroActivity"
+            android:name="com.aptoide.market.android.apps.games.activity.IntroActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,18 +32,18 @@
         </activity>
 
         <activity
-            android:name=".activity.EnterActivity"
+            android:name="com.aptoide.market.android.apps.games.activity.EnterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.aptoide.market.android.apps.games.activity.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <service
-            android:name=".service.NotificationService"
+            android:name="com.aptoide.market.android.apps.games.service.NotificationService"
             android:exported="false" />
 
 
@@ -53,7 +53,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.voroshilo.finder.fileProvider"
+            android:authorities="com.aptoide.market.android.apps.games.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
