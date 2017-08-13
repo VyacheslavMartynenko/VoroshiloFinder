@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VoroshiloFinder</string>
+    <string name="app_name">Tips for Apptoide Market</string>
 
     <!-- IntroActivity -->
     <string name="progress_text">Updating preferences…</string>
