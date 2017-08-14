@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.aptoide.market.android.apps.games.R;
@@ -58,6 +59,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @BindView(R.id.container_burst)
     LinearLayout containerBurst;
+
+    @BindView(R.id.content_main)
+    RelativeLayout contentMain;
 
     @OnClick(R.id.button_burst)
     void downloadNewApp() {
@@ -211,6 +215,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 dialog.show(getSupportFragmentManager(), "rating");
             }
         }
+
+        showBanner(contentMain);
     }
 
     private List<Application> indexOfAll(int categoryId, List<Application> applicationList) {

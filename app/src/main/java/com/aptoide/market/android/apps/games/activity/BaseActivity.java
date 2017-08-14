@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.appodeal.ads.Appodeal;
 
 import com.aptoide.market.android.apps.games.application.FinderApplication;
 import com.aptoide.market.android.apps.games.model.networking.settings.SettingsDataBody;
 import com.aptoide.market.android.apps.games.util.preferences.UserPreferences;
+import com.startapp.android.publish.ads.banner.Banner;
 import com.startapp.android.publish.adsCommon.StartAppAd;
 import com.startapp.android.publish.adsCommon.StartAppSDK;
 
@@ -30,7 +33,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 Appodeal.disableNetwork(this, "cheetah");
                 String appKey = UserPreferences.getInstance().getAppodealKey();
                 Appodeal.disableLocationPermissionCheck();
-                Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL);
+                Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.BANNER);
                 break;
             case SettingsDataBody.NO:
                 break;
@@ -87,6 +90,25 @@ public abstract class BaseActivity extends AppCompatActivity {
                 break;
             case SettingsDataBody.START_APP:
                 StartAppAd.showAd(getApplicationContext());
+                break;
+        }
+    }
+
+    public void showBanner(ViewGroup viewGroup) {
+        @SettingsDataBody.AdMode
+        int adStatus = UserPreferences.getInstance().getAdStatus();
+        switch (adStatus) {
+            case SettingsDataBody.APPODEAL:
+                Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+                break;
+            case SettingsDataBody.NO:
+                break;
+            case SettingsDataBody.START_APP:
+                Banner startAppBanner = new Banner(getApplicationContext());
+                RelativeLayout.LayoutParams bannerParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                viewGroup.addView(startAppBanner, bannerParameters);
                 break;
         }
     }
