@@ -129,6 +129,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        showAd();
         return true;
     }
 
