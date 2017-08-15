@@ -127,6 +127,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        showAd();
+
         String title = item.getTitle().toString();
         int categoryId = categoryMap.get(title);
         applicationAdapter.updateApplicationList(indexOfAll(categoryId, applicationList));
@@ -134,12 +136,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
-        showAd();
         return true;
     }
 
     @Override
     public void showAppInMarket(String appPackageName) {
+        showAd();
+        
         try {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
         } catch (android.content.ActivityNotFoundException e) {
