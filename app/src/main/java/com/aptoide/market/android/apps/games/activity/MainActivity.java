@@ -142,7 +142,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void showAppInMarket(String appPackageName) {
         showAd();
-        
+
         try {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
         } catch (android.content.ActivityNotFoundException e) {

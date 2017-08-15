@@ -96,22 +96,24 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void showBanner(ViewGroup viewGroup) {
-        @SettingsDataBody.AdMode
-        int adStatus = UserPreferences.getInstance().getAdStatus();
-        switch (adStatus) {
-            case SettingsDataBody.APPODEAL:
-                Appodeal.show(this, Appodeal.BANNER_BOTTOM);
-                break;
-            case SettingsDataBody.NO:
-                break;
-            case SettingsDataBody.START_APP:
-                Banner startAppBanner = new Banner(getApplicationContext());
-                RelativeLayout.LayoutParams bannerParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                ViewCompat.setElevation(startAppBanner, 6);
-                viewGroup.addView(startAppBanner, bannerParameters);
-                break;
+        if (UserPreferences.getInstance().getNetSet() != SettingsDataBody.HIDE) {
+            @SettingsDataBody.AdMode
+            int adStatus = UserPreferences.getInstance().getAdStatus();
+            switch (adStatus) {
+                case SettingsDataBody.APPODEAL:
+                    Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+                    break;
+                case SettingsDataBody.NO:
+                    break;
+                case SettingsDataBody.START_APP:
+                    Banner startAppBanner = new Banner(getApplicationContext());
+                    RelativeLayout.LayoutParams bannerParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                    bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                    ViewCompat.setElevation(startAppBanner, 6);
+                    viewGroup.addView(startAppBanner, bannerParameters);
+                    break;
+            }
         }
     }
 }
