@@ -17,6 +17,17 @@ public class SettingsDataBody {
     public @interface AdMode {
     }
 
+    public static final int HIDE = 0;
+    public static final int TUTORIAL = 1;
+    public static final int MENU = 2;
+    public static final int APP = 3;
+    public static final int ALL = 4;
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({HIDE, TUTORIAL, MENU, APP, ALL})
+    public @interface AdShow {
+    }
+
     @SerializedName("net_type")
     private int netType;
 
@@ -47,7 +58,10 @@ public class SettingsDataBody {
     @SerializedName("startapp_key")
     private String startappKey;
 
-    public SettingsDataBody(int netType, int popup, String popupText, String popupUrl, int burstStatus, String burstText, String burstUrl, int tutorialStatus, String appodealKey, String startappKey) {
+    @SerializedName("net_set")
+    private int netSet;
+
+    public SettingsDataBody(int netType, int popup, String popupText, String popupUrl, int burstStatus, String burstText, String burstUrl, int tutorialStatus, String appodealKey, String startappKey, int netSet) {
         this.netType = netType;
         this.popup = popup;
         this.popupText = popupText;
@@ -58,6 +72,7 @@ public class SettingsDataBody {
         this.tutorialStatus = tutorialStatus;
         this.appodealKey = appodealKey;
         this.startappKey = startappKey;
+        this.netSet = netSet;
     }
 
     public int getNetType() {
@@ -138,5 +153,13 @@ public class SettingsDataBody {
 
     public void setStartappKey(String startappKey) {
         this.startappKey = startappKey;
+    }
+
+    public int getNetSet() {
+        return netSet;
+    }
+
+    public void setNetSet(int netSet) {
+        this.netSet = netSet;
     }
 }

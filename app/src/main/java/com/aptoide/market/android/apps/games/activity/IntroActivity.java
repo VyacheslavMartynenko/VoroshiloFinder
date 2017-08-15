@@ -46,6 +46,7 @@ public class IntroActivity extends BaseActivity {
             UserPreferences.getInstance().setBurstText(data.getBurstText());
             UserPreferences.getInstance().setStartappKey(data.getStartappKey());
             UserPreferences.getInstance().setAppodealKey(data.getAppodealKey());
+            UserPreferences.getInstance().setNetSet(data.getNetSet());
 
             IntroActivity introActivity = introActivityWeakReference.get();
             if (introActivity != null) {

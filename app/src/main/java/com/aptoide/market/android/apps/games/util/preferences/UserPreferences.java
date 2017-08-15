@@ -15,6 +15,7 @@ public class UserPreferences extends AbstractPreferences {
     private static final String POPUP_TEXT = "PopupText";
     private static final String BURST_TEXT = "BurstText";
     private static final String BURST_URL = "BurstUrl";
+    private static final String NET_SET = "NetSet";
     private static final String STARTAPP_KEY = "StartappKey";
     private static final String APPODEAL_KEY = "AppodealKey";
 
@@ -118,5 +119,13 @@ public class UserPreferences extends AbstractPreferences {
 
     public void setAppodealKey(String burstUrl) {
         preferences.edit().putString(APPODEAL_KEY, burstUrl).apply();
+    }
+
+    public int getNetSet() {
+        return preferences.getInt(TUTORIAL_STATUS, SettingsDataBody.HIDE);
+    }
+
+    public void setNetSet(int netSet) {
+        preferences.edit().putInt(TUTORIAL_STATUS, netSet).apply();
     }
 }
