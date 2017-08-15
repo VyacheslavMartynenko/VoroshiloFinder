@@ -127,7 +127,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        showAd();
+        int netSet = UserPreferences.getInstance().getNetSet();
+        if (netSet == SettingsDataBody.MENU || netSet == SettingsDataBody.ALL) {
+            showAd();
+        }
 
         String title = item.getTitle().toString();
         int categoryId = categoryMap.get(title);
@@ -141,7 +144,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void showAppInMarket(String appPackageName) {
-        showAd();
+        int netSet = UserPreferences.getInstance().getNetSet();
+        if (netSet == SettingsDataBody.APP || netSet == SettingsDataBody.ALL) {
+            showAd();
+        }
 
         try {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
