@@ -3,6 +3,7 @@ package com.aptoide.market.android.apps.games.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -105,9 +106,10 @@ public abstract class BaseActivity extends AppCompatActivity {
                 break;
             case SettingsDataBody.START_APP:
                 Banner startAppBanner = new Banner(getApplicationContext());
-                RelativeLayout.LayoutParams bannerParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                RelativeLayout.LayoutParams bannerParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL);
                 bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                ViewCompat.setElevation(startAppBanner, 6);
                 viewGroup.addView(startAppBanner, bannerParameters);
                 break;
         }
