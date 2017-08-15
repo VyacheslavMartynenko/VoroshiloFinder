@@ -50,7 +50,8 @@ public class EnterActivity extends BaseActivity {
         @Override
         public void onPageSelected(int position) {
             setEnterButtonText(position);
-            if (UserPreferences.getInstance().getNetSet() == SettingsDataBody.TUTORIAL) {
+            int netSet = UserPreferences.getInstance().getNetSet();
+            if (netSet == SettingsDataBody.TUTORIAL || netSet == SettingsDataBody.ALL) {
                 showAd();
             }
         }
