@@ -46,11 +46,9 @@
             android:name="com.aptoide.market.android.apps.games.service.NotificationService"
             android:exported="false" />
 
-
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="b3e0fc1d6b287c93771791c92573b4086655c96a" />
-
+            android:value="c63501abcc2795ede0f59c8d24ab36bd9135c531" />
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.aptoide.market.android.apps.games.fileProvider"
