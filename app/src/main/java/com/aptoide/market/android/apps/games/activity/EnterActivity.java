@@ -8,6 +8,10 @@ import android.widget.Button;
 
 import com.aptoide.market.android.apps.games.R;
 import com.aptoide.market.android.apps.games.adapter.FinderPageAdapter;
+import com.aptoide.market.android.apps.games.model.networking.settings.SettingsDataBody;
+import com.aptoide.market.android.apps.games.util.preferences.UserPreferences;
+
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,7 +50,9 @@ public class EnterActivity extends BaseActivity {
         @Override
         public void onPageSelected(int position) {
             setEnterButtonText(position);
-            showAd();
+            if (UserPreferences.getInstance().getNetSet() == SettingsDataBody.TUTORIAL) {
+                showAd();
+            }
         }
 
         @Override
