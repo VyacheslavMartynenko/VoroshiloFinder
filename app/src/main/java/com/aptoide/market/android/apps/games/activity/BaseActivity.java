@@ -1,10 +1,12 @@
 package com.aptoide.market.android.apps.games.activity;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -96,29 +98,36 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void showBanner(ViewGroup viewGroup) {
+    public void showBanner(ViewGroup viewGroup, ViewGroup viewGroupWrapper) {
         if (UserPreferences.getInstance().getNetSet() != SettingsDataBody.HIDE) {
-            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) viewGroup.getLayoutParams();
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewGroup.getLayoutParams();
 
             @SettingsDataBody.AdMode
             int adStatus = UserPreferences.getInstance().getAdStatus();
             switch (adStatus) {
                 case SettingsDataBody.APPODEAL:
-                    params.setMargins(0, 0, 0, getResources().getDimensionPixelSize(R.dimen.fab_elevate_margin));
+                    setMargins(params);
                     Appodeal.show(this, Appodeal.BANNER_BOTTOM);
                     break;
                 case SettingsDataBody.NO:
                     break;
                 case SettingsDataBody.START_APP:
-                    params.setMargins(0, 0, 0, getResources().getDimensionPixelSize(R.dimen.fab_elevate_margin));
+                    setMargins(params);
                     Banner startAppBanner = new Banner(getApplicationContext());
                     RelativeLayout.LayoutParams bannerParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                     bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL);
                     bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
                     ViewCompat.setElevation(startAppBanner, 6);
-                    viewGroup.addView(startAppBanner, bannerParameters);
+                    viewGroupWrapper.addView(startAppBanner, bannerParameters);
                     break;
             }
         }
+    }
+
+    private void setMargins(RelativeLayout.LayoutParams params) {
+        Resources resources = getResources();
+        int margin = resources.getDimensionPixelSize(R.dimen.fab_margin);
+        int elevateMarin = resources.getDimensionPixelSize(R.dimen.fab_elevate_margin);
+        params.setMargins(margin, margin, margin, elevateMarin);
     }
 }

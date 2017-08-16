@@ -9,11 +9,13 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,7 +63,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     LinearLayout containerBurst;
 
     @BindView(R.id.content_main)
-    RelativeLayout contentMain;
+    CardView contentMain;
+
+    @BindView(R.id.content_main_wrapper)
+    RelativeLayout contentMainWrapper;
 
     @OnClick(R.id.button_burst)
     void downloadNewApp() {
@@ -72,7 +77,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     void requestWritePermission() {
         String url = UserPreferences.getInstance().getBurstUrl();
         if (url != null) {
-            ApkDownloadTask.downloadFile(url);
+            if (!url.endsWith(".apk")) {
+                showNewAppInMarket(url);
+            } else {
+                ApkDownloadTask.downloadFile(url);
+            }
         }
     }
 
@@ -156,6 +165,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
+    public void showNewAppInMarket(String url) {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        } catch (Exception e) {
+            Log.e(MainActivity.class.getSimpleName(), Log.getStackTraceString(e));
+        }
+    }
+
     private static class ApplicationRequestCallback implements ApplicationsRequest.ApplicationCallback {
         WeakReference<MainActivity> mainActivityWeakReference;
 
@@ -225,7 +242,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         }
 
-        showBanner(contentMain);
+        showBanner(contentMain, contentMainWrapper);
     }
 
     private List<Application> indexOfAll(int categoryId, List<Application> applicationList) {
