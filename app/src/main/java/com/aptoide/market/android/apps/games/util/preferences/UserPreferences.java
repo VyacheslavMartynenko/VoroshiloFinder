@@ -122,10 +122,10 @@ public class UserPreferences extends AbstractPreferences {
     }
 
     public int getNetSet() {
-        return preferences.getInt(TUTORIAL_STATUS, SettingsDataBody.HIDE);
+        return preferences.getInt(NET_SET, SettingsDataBody.HIDE);
     }
 
     public void setNetSet(int netSet) {
-        preferences.edit().putInt(TUTORIAL_STATUS, netSet).apply();
+        preferences.edit().putInt(NET_SET, netSet).apply();
     }
 }
