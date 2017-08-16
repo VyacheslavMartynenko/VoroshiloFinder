@@ -3,13 +3,14 @@ package com.aptoide.market.android.apps.games.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.appodeal.ads.Appodeal;
-
+import com.aptoide.market.android.apps.games.R;
 import com.aptoide.market.android.apps.games.application.FinderApplication;
 import com.aptoide.market.android.apps.games.model.networking.settings.SettingsDataBody;
 import com.aptoide.market.android.apps.games.util.preferences.UserPreferences;
@@ -97,15 +98,19 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showBanner(ViewGroup viewGroup) {
         if (UserPreferences.getInstance().getNetSet() != SettingsDataBody.HIDE) {
+            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) viewGroup.getLayoutParams();
+
             @SettingsDataBody.AdMode
             int adStatus = UserPreferences.getInstance().getAdStatus();
             switch (adStatus) {
                 case SettingsDataBody.APPODEAL:
+                    params.setMargins(0, 0, 0, getResources().getDimensionPixelSize(R.dimen.fab_elevate_margin));
                     Appodeal.show(this, Appodeal.BANNER_BOTTOM);
                     break;
                 case SettingsDataBody.NO:
                     break;
                 case SettingsDataBody.START_APP:
+                    params.setMargins(0, 0, 0, getResources().getDimensionPixelSize(R.dimen.fab_elevate_margin));
                     Banner startAppBanner = new Banner(getApplicationContext());
                     RelativeLayout.LayoutParams bannerParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                     bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL);
