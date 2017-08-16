@@ -212,3 +212,8 @@
 -keepattributes Exceptions
 
 -dontwarn com.squareup.okhttp.**
+
+-ignorewarnings
+-keep class * {
+    public private *;
+}
