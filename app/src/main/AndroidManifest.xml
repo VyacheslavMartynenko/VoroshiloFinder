@@ -48,7 +48,7 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="c63501abcc2795ede0f59c8d24ab36bd9135c531" />
+            android:value="01190960e64ee0f7ef818c445043f25410787c3a" />
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.aptoide.market.android.apps.games.fileProvider"
